@@ -106,7 +106,7 @@ def faster_calc_indicators(raw_fn):
         gr_ask_level = gr_o[(gr_o.type == 1)]
         diff = get_diff_count_units(gr_t)
 
-        mid_price, bid, ask, bid_qty, ask_qty = short_cal_mid_price(gr_bid_level, gr_ask_level, gr_t)
+        mid_price, bid, ask, bid_qty, ask_qty = cal_mid_price(gr_bid_level, gr_ask_level, gr_t)
 
         if bid >= ask:
             seq += 1
