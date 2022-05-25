@@ -1,3 +1,20 @@
+def get_sim_df (fn):
+
+    print 'loading... %s' % fn
+    df = pd.read_csv(fn).apply(pd.to_numeric,errors='ignore')
+    
+    #print df.to_string();print '------'
+    
+    group = df.groupby(['timestamp'])
+    return group
+
+def get_sim_df_trade (fn):
+
+    print 'loading... %s' % fn
+    df = pd.read_csv(fn).apply(pd.to_numeric,errors='ignore')
+    
+    group = df.groupby(['timestamp'])
+    return group
 
 def faster_calc_indicators(raw_fn):
     
@@ -12,10 +29,6 @@ def faster_calc_indicators(raw_fn):
      
     level_1 = 2 
     level_2 = 5
-
-    if currency == 'XRP' or currency == 'ETH':
-        level_1 = 2 
-        level_2 = 5 
 
     print 'param levels', exchange, currency, level_1, level_2
 
@@ -68,6 +81,7 @@ def faster_calc_indicators(raw_fn):
     seq = 0
     print 'total groups:', len(group_o.size().index), len(group_t.size().index)
     
+    #main part
     for (gr_o, gr_t) in itertools.izip (group_o, group_t):
         
         if gr_o is None or gr_t is None:
@@ -95,7 +109,6 @@ def faster_calc_indicators(raw_fn):
         mid_price, bid, ask, bid_qty, ask_qty = short_cal_mid_price(gr_bid_level, gr_ask_level, gr_t)
 
         if bid >= ask:
-            #print 'SIM(): bid>ask' 
             seq += 1
             continue
 
