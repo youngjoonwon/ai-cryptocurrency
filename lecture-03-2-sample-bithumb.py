@@ -35,7 +35,7 @@ def bithumb_balance(api, cur):
 def bithumb_buy_order(api, price, units, cur):
     
     rgParams = {'order_currency': cur, 'price': price, 'units': units, 'type': 'bid', 'payment_currency':'KRW'}
-    print rgParams
+    print (rgParams)
     result = api.xcoinApiCall("/trade/place", rgParams)
     
     try_again = False 
